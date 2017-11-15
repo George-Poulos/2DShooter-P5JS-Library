@@ -5,10 +5,13 @@
 
 function Player() {
 
-    this.y = height/2;
-    this.x = width/2;
+    this.y = random(30, width-30);
+    this.x = random(30, width-30);
 
-    this.size = 32;
+    this.health = 1;
+
+    this.baseSize = 32;
+    this.size = this.baseSize * this.health;
 
     this.gravity = 0;
     this.movement = 10;
@@ -16,6 +19,7 @@ function Player() {
 
     this.dirX = 1;
     this.dirY = 0;
+
 
     this.cannonSizeX = 10;
     this.cannonSizeY = 10;
@@ -98,6 +102,15 @@ function Player() {
             }
         }
 
+    };
+
+    this.hitEnemy = function(enemy){
+        return (this.x + (this.size / 2) > (enemy.x - enemy.size / 2) && this.x - (this.size / 2) < (enemy.x + enemy.size / 2 )) && (this.y + (this.size / 2) > (enemy.y - enemy.size / 2) && this.y - (this.size / 2) < (enemy.y + enemy.size / 2));
+    };
+
+    this.doDamage = function(){
+        this.health--;
+        this.size = this.baseSize * this.health;
     };
 
     this.shoot = function(){

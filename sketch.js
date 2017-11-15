@@ -26,6 +26,13 @@ function draw() {
         }
     }
 
+    if(player.hitEnemy(enemy)){
+        player.doDamage();
+        if(player.health <= 0){
+            player = new Player();
+        }
+    }
+
     doMove();
     enemy.update(player);
     player.update();
