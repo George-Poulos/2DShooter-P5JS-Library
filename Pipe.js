@@ -36,11 +36,7 @@ function Pipe() {
     };
 
     this.offscreen = function() {
-        if (this.x < -this.w) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.x < -this.w;
     }
 
 

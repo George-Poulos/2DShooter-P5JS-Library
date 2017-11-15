@@ -17,11 +17,11 @@ function setup() {
 function draw() {
     background(0);
 
-
     for(var i = player.bullets.length - 1; i > 0; i --){
         if(player.bullets[i].hitEnemy(enemy)){
             enemy.doDamage();
             player.bullets.splice(i,1);
+            enemy = new Enemy(100,100,2,3);
         }
     }
 
