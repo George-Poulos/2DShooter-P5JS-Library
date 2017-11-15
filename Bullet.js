@@ -5,8 +5,7 @@
  */
 
 function Bullet(){
-    this.width = 0;
-    this.height = 0;
+    this.size = 0;
 
     this.x = 0;
     this.y = 0;
@@ -27,19 +26,20 @@ function Bullet(){
             this.dirX = directionX;
             this.dirY = directionY;
 
-            this.width = 10;
-            this.height = 10;
+            this.size = 10;
             this.show();
     };
 
-    this.hitEnemy = function(enemy){
-        return (this.x > (enemy.x - enemy.size / 2) && this.x < (enemy.x + enemy.size / 2 )) && (this.y > (enemy.y - enemy.size / 2) && this.y < (enemy.y + enemy.size / 2));
-
+    this.hitEnemy = function(enemy) {
+        if ((this.x + (this.size/2) > (enemy.x - enemy.size / 2) && this.x - (this.size/2) < (enemy.x + enemy.size / 2 )) && (this.y + (this.size/2) > (enemy.y - enemy.size / 2) && this.y - (this.size/2) < (enemy.y + enemy.size / 2))) {
+            return true;
+        }
+        return false;
     };
 
     this.show = function(){
         fill(255,255,255);
-        ellipse(this.x, this.y, this.width, this.height);
+        ellipse(this.x, this.y, this.size, this.size);
     };
 
     this.update = function(){
