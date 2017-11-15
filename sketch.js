@@ -21,7 +21,8 @@ function draw() {
         if(player.bullets[i].hitEnemy(enemy)){
             enemy.doDamage();
             player.bullets.splice(i,1);
-            enemy = new Enemy(100,100,2,3);
+            if(enemy.health <= 0)
+                enemy = new Enemy(100,100,2,3);
         }
     }
 
