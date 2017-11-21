@@ -1,6 +1,8 @@
 /**
  * @author - George Poulos
  * @constructor
+ *
+ * @TODO - Create a config file for a new player set values such as color, health, speed, and other aspects
  */
 
 function Player() {
@@ -26,7 +28,7 @@ function Player() {
 
     this.bulletSpeed = 10;
 
-     this.bullets = [new Bullet()];
+    this.bullets = [new Bullet()];
 
     this.prevTime = millis();
     this.shootTime = 200;

@@ -1,5 +1,5 @@
 /**
- * Created by George on 11/13/17.
+ * Example of the library
  */
 var player;
 var enemy;

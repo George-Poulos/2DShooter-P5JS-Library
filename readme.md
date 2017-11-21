@@ -8,5 +8,13 @@ You can view example of this library in action here :
 
 ## Objects 
 ### Player
+    new Player()
+    // Spawns a new user controlled player in the middle of the map
 ### Bullet
+    new Bullet()
+    // spawns new projectile (Used by Player)
 ### Enemy
+    new Enemy(x, y, health, movement)
+    // Spawns a new enemy at X-pos : x, Y-pos : y with health and movement speed.
+    
+    
