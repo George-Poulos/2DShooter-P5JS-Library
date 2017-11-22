@@ -1,101 +1,55 @@
 /**
  * Example of the library
  */
-var player;
-var enemy;
+
 var score = 0;
-var up = false, down = false, left = false, right = false, shoot = false;
 
 p5.disableFriendlyErrors = true;
 
 function setup() {
     createCanvas(900, 900);
-    player = new Player();
-    enemy = new Enemy(100,100,2,3);
+    this.player = new Player();
+    this.controller = new Controller(this.player);
+    this.enemy = new Enemy(100,100,2,3);
 }
 
 function draw() {
     background(0);
 
-    for(var i = player.bullets.length - 1; i > 0; i --){
-        if(player.bullets[i].hitEnemy(enemy)){
-            enemy.doDamage();
-            player.bullets.splice(i,1);
-            if(enemy.health <= 0)
-                enemy = new Enemy(100,100,2,3);
+    for(var i = this.player.bullets.length - 1; i > 0; i --){
+        if(this.player.bullets[i].hitEnemy(enemy)){
+            this.enemy.doDamage();
+            this.player.bullets.splice(i,1);
+            if(this.enemy.health <= 0)
+                this.enemy = new Enemy(100,100,2,3);
         }
     }
 
-    if(player.hitEnemy(enemy)){
-        player.doDamage();
-        if(player.health <= 0){
-            player = new Player();
+    if(this.player.hitEnemy(this.enemy)){
+        this.player.doDamage();
+        if(this.player.health <= 0){
+            delete(this.controller);
+            delete(this.player);
+            this.player = new Player();
+            this.controller = new Controller(this.player);
         }
     }
 
-    doMove();
-    enemy.update(player);
-    player.update();
+    this.controller.doMove();
+    this.enemy.update(player);
+    this.player.update();
 
 
 }
 
-function doMove(){
-    if(right){
-        player.right();
-    }
-    if(left){
-        player.left();
-    }
-    if(down){
-        player.down();
-    }
-    if(up){
-        player.up();
-    }
-    if(shoot){
-        player.shoot();
-    }
-
+function keyPressed(){
+    this.controller.keyPressed(key, keyCode)
 }
 
 function keyReleased(){
-    if (keyCode === RIGHT_ARROW) {
-        right = false;
-    }
-    if(keyCode === LEFT_ARROW) {
-        left = false;
-    }
-    if(keyCode === UP_ARROW){
-        up = false;
-    }
-    if(keyCode === DOWN_ARROW){
-        down = false;
-    }
-    if(key === ' ') {
-        shoot = false;
-        player.resetShootTime();
-    }
+    this.controller.keyReleased(key, keyCode);
 }
 
-function keyPressed() {
-    if (keyCode === RIGHT_ARROW) {
-        right = true;
-    }
-    if(keyCode === LEFT_ARROW) {
-        left = true;
-    }
-    if(keyCode === UP_ARROW){
-        up = true;
-    }
-    if(keyCode === DOWN_ARROW){
-        down = true;
-    }
 
-    if(key === ' '){
-        shoot = true;
-    }
 
-    return false;
 
-}
